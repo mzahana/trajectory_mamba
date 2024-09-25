@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # Variables
-IMAGE_NAME="s_mamba_image"
-CONTAINER_NAME="s_mamba_container"
+IMAGE_NAME="s_mamba_image_wsl2"
+CONTAINER_NAME="s_mamba_container_wsl2"
 REPO_DIR="$(pwd)/pkgs"
 APP_DIR="/home/ai/app"
 USER=ai
-DOCKERFILE="Dockerfile"
+DOCKERFILE="Dockerfile.wsl2"
 
 # Function to check if the container is already running
 is_container_running() {
