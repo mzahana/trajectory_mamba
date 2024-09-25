@@ -1,0 +1,5 @@
+scikit-learn
+numpy
+matplotlib
+reformer-pytorch==1.4.4
+# mamba-ssm==1.2.0
