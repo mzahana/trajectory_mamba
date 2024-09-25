@@ -19,10 +19,13 @@ RUN apt-get update && apt-get install -y \
 # Upgrade pip to the latest version
 RUN python3.10 -m pip install --upgrade pip
 
+# Create a symlink from python3 to python
+RUN ln -s /usr/bin/python3 /usr/bin/python
+
 # Create a non-root user 'ai' with sudo privileges
 RUN useradd -m ai && echo "ai:ai" | chpasswd && adduser ai sudo
 
-# Allow passwordless sudo for 'ai' (optional for security)
+# Allow passwordless sudo for 'ai'
 RUN echo "ai ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # Set the user to 'ai'
@@ -34,16 +37,17 @@ WORKDIR /home/ai/app
 # Copy the requirements.txt file into the container
 COPY --chown=ai:ai requirements.txt .
 
-# Install torch with CUDA 11.8 support first to satisfy build dependencies
-RUN pip install torch torchvision --extra-index-url https://download.pytorch.org/whl/cu118
+# Install torch 2.0.1 with CUDA 11.8 support
+RUN pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 torchaudio==2.0.2+cu118 --extra-index-url https://download.pytorch.org/whl/cu118
 
-# Install packaging to satisfy mamba-ssm dependencies
+# Install reformer-pytorch and mamba-ssm
+# RUN pip install reformer-pytorch==1.4.4 mamba-ssm==1.2.0
+
+# Install packaging to satisfy any mamba-ssm dependencies
 RUN pip install packaging
 
-# Install the precompiled wheel for mamba-ssm
-RUN pip install https://github.com/state-spaces/mamba/releases/download/v2.2.2/mamba_ssm-2.2.2+cu118torch2.0cxx11abiFALSE-cp310-cp310-linux_x86_64.whl
-
-# Install the remaining Python dependencies
+RUN echo "Installing requirements.txt"
+# Install the remaining Python dependencies from the requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 # (Optional) Clone your repositories here if needed
