@@ -44,7 +44,7 @@ Once the toolkit is set up, you can run containers with GPU support.
 First, clone this repository to your local machine:
 
 ```bash
-git clone https://github.com/your-username/trajectory_mamba.git
+git clone https://github.com/mzahana/trajectory_mamba.git
 cd trajectory_mamba
 ```
 
@@ -97,6 +97,16 @@ This shell script automates the process of building the Docker image and running
 ### 4. enter_container.sh
 
 This script allows you to easily enter the running container. It checks if the container is already running, and if not, it starts the container and attaches to it.
+
+### 5. Running S-Mamba
+* Run the container using `./run_container.sh`
+* Once you are inside the container shell, execute `cd pkgs` then clone the [S-D-Mamba repo](https://github.com/wzhwzhwzh0921/S-D-Mamba)
+```bash
+git clone https://github.com/wzhwzhwzh0921/S-D-Mamba.git
+```
+* Download the datasets from [this link](https://github.com/wzhwzhwzh0921/S-D-Mamba/releases/download/datasets/S-Mamba_datasets.zip), extraxt the directory, and rename it to `dataset`, and put it in the `S-D-Mamba` directory
+
+* Then, you can run the example scripts as described in [S-D-Mamba repo](https://github.com/wzhwzhwzh0921/S-D-Mamba)
 
 ## Contributing
 
