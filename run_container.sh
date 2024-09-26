@@ -44,6 +44,16 @@ run_container() {
         $IMAGE_NAME:latest
 }
 
+# Ensure the pkgs directory exists and has proper permissions on the host system
+if [ ! -d "$REPO_DIR" ]; then
+    echo "Creating pkgs directory at $REPO_DIR..."
+    mkdir -p "$REPO_DIR"
+fi
+
+# Ensure the directory is owned by the current user
+echo "Setting ownership of pkgs directory..."
+sudo chown -R $(id -u):$(id -g) "$REPO_DIR"
+
 # Main script logic
 
 # If the container is already running, enter it
