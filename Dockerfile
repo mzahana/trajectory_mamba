@@ -46,6 +46,8 @@ RUN pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 torchaudio==2.0.2+c
 # Install packaging to satisfy any mamba-ssm dependencies
 RUN pip install packaging
 
+RUN pip install plotly
+
 RUN echo "Installing requirements.txt"
 # Install the remaining Python dependencies from the requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
